@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Bafna Silver House — Est. 1983</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:      #faf8f4;
+  --warm-white: #f5f2ec;
+  --linen:      #ece8df;
+  --platinum:   #d6d3cc;
+  --silver-mid: #b8b4ac;
+  --silver-dk:  #8a8780;
+  --charcoal:   #3a3835;
+  --ink:        #1e1c19;
+  --accent:     #9a8c7a;
+  --accent-lt:  #c4b9a8;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* grain */
+body::after {
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9000;opacity:.5;
+}
+
+/* custom cursor — desktop only */
+@media(hover:hover){
+  body{cursor:none}
+  #cur{width:7px;height:7px;background:var(--charcoal);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}
+  #curR{width:30px;height:30px;border:1px solid var(--charcoal);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .14s ease}
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:68px;padding:0 6%;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(250,248,244,.97);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--linen);
+}
+.nav-logo{font-family:'Playfair Display',serif;font-size:16px;letter-spacing:.06em;color:var(--ink)}
+.nav-logo em{font-style:italic;color:var(--accent)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:10px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--silver-dk);text-decoration:none;transition:color .25s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{font-size:10px;font-weight:500;letter-spacing:.15em;color:var(--ink);text-decoration:none;padding:9px 22px;border:1px solid var(--charcoal);transition:all .3s;white-space:nowrap}
+.nav-cta:hover{background:var(--ink);color:var(--cream)}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:4px;background:none;border:none;cursor:pointer}
+.hamburger span{display:block;width:22px;height:1px;background:var(--charcoal);transition:all .3s}
+
+/* Mobile overlay menu */
+.m-menu{
+  display:none;position:fixed;inset:0;top:68px;background:var(--cream);z-index:900;
+  flex-direction:column;align-items:center;justify-content:center;gap:36px;
+  border-top:1px solid var(--linen);
+}
+.m-menu.open{display:flex}
+.m-menu a{font-family:'Playfair Display',serif;font-size:26px;color:var(--ink);text-decoration:none;transition:color .2s}
+.m-menu a:hover{color:var(--accent)}
+.m-tel-btn{font-size:11px;font-weight:400;letter-spacing:.2em;padding:13px 32px;border:1px solid var(--charcoal);color:var(--ink);text-decoration:none}
+
+/* ── HERO ── */
+.hero{
+  min-height:100svh;padding-top:68px;
+  display:grid;grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:72px 6% 160px 8%;
+}
+
+/* Eyebrow */
+.eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:24px;opacity:0;animation:fadeUp .9s ease .2s forwards}
+.ey-rule{width:28px;height:1px;background:var(--accent)}
+.ey-txt{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--accent)}
+
+.hero-h{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(46px,6vw,88px);
+  font-weight:400;line-height:1.06;
+  color:var(--ink);
+  opacity:0;animation:fadeUp .9s ease .35s forwards;
+}
+.hero-h em{
+  font-style:italic;
+  background:linear-gradient(130deg,var(--silver-dk),var(--platinum),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-tag{
+  font-family:'Cormorant',serif;font-size:clamp(15px,1.5vw,19px);
+  letter-spacing:.08em;color:var(--silver-dk);
+  margin:12px 0 36px;
+  opacity:0;animation:fadeUp .9s ease .5s forwards;
+}
+.hero-body{
+  font-family:'Cormorant',serif;font-size:clamp(17px,1.6vw,21px);
+  line-height:1.85;color:var(--charcoal);max-width:420px;
+  margin-bottom:48px;
+  opacity:0;animation:fadeUp .9s ease .65s forwards;
+}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp .9s ease .8s forwards}
+.btn-dk{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--cream);background:var(--ink);padding:15px 34px;text-decoration:none;border:1px solid var(--ink);transition:all .3s;display:inline-block}
+.btn-dk:hover{background:var(--charcoal)}
+.btn-ln{font-size:10px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);background:transparent;padding:15px 34px;text-decoration:none;border:1px solid var(--platinum);transition:all .3s;display:inline-block}
+.btn-ln:hover{border-color:var(--ink)}
+
+/* ─ Stats strip ─ */
+.stats-strip{
+  position:absolute;bottom:0;left:0;right:50%;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--linen);
+  opacity:0;animation:fadeUp .9s ease 1s forwards;
+  background:var(--cream);
+}
+.stat-item{padding:22px 0 22px 8%;border-right:1px solid var(--linen)}
+.stat-item:last-child{border-right:none}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(24px,2.8vw,36px);font-weight:400;color:var(--ink);line-height:1;
+}
+.stat-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--silver-dk);margin-top:5px}
+
+/* ─ Hero right ─ */
+.hero-right{
+  background:var(--warm-white);
+  border-left:1px solid var(--linen);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.hero-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(180,175,168,.15),transparent 70%)}
+
+/* Float cards */
+.float-card{
+  position:absolute;background:rgba(250,248,244,.94);border:1px solid var(--linen);
+  backdrop-filter:blur(10px);padding:12px 18px;
+}
+.fc-lbl{font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+.fc-val{font-family:'Playfair Display',serif;font-size:17px;color:var(--ink)}
+
+/* Diamond SVG */
+.diamond-wrap{
+  position:relative;width:300px;height:300px;
+  display:flex;align-items:center;justify-content:center;
+}
+.orbit-ring{
+  position:absolute;inset:-40px;border-radius:50%;
+  border:1px dashed rgba(154,140,122,.22);
+  animation:orb 22s linear infinite;
+}
+@keyframes orb{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.orb-dot{position:absolute;width:5px;height:5px;background:var(--accent);border-radius:50%}
+.orb-dot:nth-child(1){top:-2px;left:calc(50% - 2px)}
+.orb-dot:nth-child(2){bottom:-2px;left:calc(50% - 2px)}
+.orb-dot:nth-child(3){left:-2px;top:calc(50% - 2px)}
+.orb-dot:nth-child(4){right:-2px;top:calc(50% - 2px)}
+
+.dmnd{
+  animation:dmndSpin 14s linear infinite;
+  filter:drop-shadow(0 6px 32px rgba(0,0,0,.09));
+}
+@keyframes dmndSpin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+
+/* ── MARQUEE ── */
+.mq-wrap{overflow:hidden;padding:13px 0;background:var(--warm-white);border-top:1px solid var(--linen);border-bottom:1px solid var(--linen)}
+.mq-track{display:flex;animation:mqScr 26s linear infinite;white-space:nowrap}
+@keyframes mqScr{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq-item{display:inline-flex;align-items:center;gap:18px;padding:0 28px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--silver-dk)}
+.mq-gem{width:4px;height:4px;background:var(--accent);border-radius:50%;flex-shrink:0}
+
+/* ── SECTIONS ── */
+.sec{padding:108px 8%}
+.sec-alt{background:var(--warm-white)}
+
+.sec-ey{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.sec-rl{width:24px;height:1px;background:var(--accent)}
+.sec-tg{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--accent)}
+.sec-h{font-family:'Playfair Display',serif;font-size:clamp(28px,3.8vw,52px);font-weight:400;line-height:1.1;color:var(--ink)}
+.sec-h em{font-style:italic}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:60px}
+.about-body{font-family:'Cormorant',serif;font-size:clamp(17px,1.6vw,21px);line-height:1.85;color:var(--charcoal)}
+.about-body p+p{margin-top:20px}
+
+.ring-frame{
+  background:var(--linen);border:1px solid var(--platinum);
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.ring-frame::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 38% 28%,rgba(255,255,255,.5),transparent 65%)}
+.ring-svg{animation:rSpin 12s linear infinite;filter:drop-shadow(0 4px 20px rgba(0,0,0,.09))}
+@keyframes rSpin{from{transform:rotateY(0deg) rotateX(12deg)}to{transform:rotateY(360deg) rotateX(12deg)}}
+
+.ab-badges{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px}
+.ab-badge{background:var(--cream);border:1px solid var(--linen);padding:22px 18px;transition:border-color .3s}
+.ab-badge:hover{border-color:var(--platinum)}
+.ab-num{font-family:'Playfair Display',serif;font-size:28px;color:var(--ink);line-height:1}
+.ab-lbl{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--silver-dk);margin-top:5px}
+
+/* ── COLLECTIONS ── */
+.col-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto auto;
+  gap:2px;margin-top:52px;
+}
+.col-card{position:relative;overflow:hidden;background:var(--linen);aspect-ratio:3/4}
+.col-card:first-child{grid-row:1/3;aspect-ratio:auto}
+.c-vis{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .8s cubic-bezier(.25,.46,.45,.94);
+}
+.col-card:hover .c-vis{transform:scale(1.06)}
+.col-card::after{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(0deg,rgba(30,28,25,.75) 0%,rgba(30,28,25,.06) 55%,transparent 100%);
+}
+.c-info{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:24px 22px;z-index:2;
+  transform:translateY(5px);transition:transform .35s ease;
+}
+.col-card:hover .c-info{transform:translateY(0)}
+.c-cat{font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:rgba(250,248,244,.6);margin-bottom:5px}
+.c-ttl{font-family:'Playfair Display',serif;font-size:19px;color:var(--cream);font-weight:400}
+.c-sub{font-family:'Cormorant',serif;font-size:14px;color:rgba(250,248,244,.65);margin-top:3px;opacity:0;transition:opacity .3s .05s}
+.col-card:hover .c-sub{opacity:1}
+
+/* card bg tints */
+.v1{background:linear-gradient(135deg,#edead4,#dddac8)}
+.v2{background:linear-gradient(135deg,#eeeae3,#e3dfd7)}
+.v3{background:linear-gradient(135deg,#f0ece5,#e5e1d9)}
+.v4{background:linear-gradient(135deg,#ebe7e0,#e0dcd4)}
+.v5{background:linear-gradient(135deg,#edeae3,#e2ded6)}
+
+/* ── QUALITY ── */
+.q-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px}
+.q-card{
+  padding:44px 32px;background:var(--cream);
+  border:1px solid var(--linen);
+  position:relative;overflow:hidden;transition:border-color .35s;
+}
+.q-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:0;transition:opacity .35s;
+}
+.q-card:hover{border-color:var(--platinum)}
+.q-card:hover::before{opacity:1}
+.q-num{font-family:'Playfair Display',serif;font-size:34px;color:var(--accent);line-height:1;font-weight:400}
+.q-sub2{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--silver-dk);margin-top:2px;margin-bottom:24px}
+.q-ttl{font-family:'Playfair Display',serif;font-size:18px;color:var(--ink);margin-bottom:12px;font-weight:400}
+.q-body{font-family:'Cormorant',serif;font-size:17px;line-height:1.8;color:var(--charcoal)}
+
+/* ── REVIEWS ── */
+.rv-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin:52px 0 36px}
+.rv-intro{font-family:'Cormorant',serif;font-size:clamp(16px,1.5vw,19px);color:var(--charcoal);line-height:1.8;max-width:400px}
+.rating-blk{text-align:right}
+.r-big{font-family:'Playfair Display',serif;font-size:68px;color:var(--ink);line-height:1}
+.r-stars{display:flex;gap:5px;justify-content:flex-end;margin-top:4px}
+.r-star{width:13px;height:13px;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);background:var(--accent)}
+.r-cnt{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--silver-dk);margin-top:6px}
+
+.rv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.rv-card{
+  padding:36px 28px;background:var(--cream);border:1px solid var(--linen);
+  position:relative;overflow:hidden;transition:border-color .3s;
+}
+.rv-card:hover{border-color:var(--platinum)}
+.rv-q{position:absolute;top:14px;right:18px;font-family:'Playfair Display',serif;font-size:72px;line-height:.7;color:var(--linen);pointer-events:none}
+.rv-stars{display:flex;gap:4px;margin-bottom:16px}
+.rv-star{width:10px;height:10px;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);background:var(--accent)}
+.rv-txt{font-family:'Cormorant',serif;font-size:clamp(15px,1.3vw,17px);line-height:1.8;color:var(--charcoal);margin-bottom:22px}
+.rv-name{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.rv-meta{font-size:9px;letter-spacing:.1em;color:var(--silver-dk);margin-top:3px}
+
+/* ── VISIT ── */
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:60px}
+.i-row{margin-bottom:32px}
+.i-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:9px}
+.i-val{font-family:'Cormorant',serif;font-size:clamp(16px,1.5vw,19px);line-height:1.7;color:var(--charcoal)}
+.i-val a{color:var(--charcoal);text-decoration:none;transition:color .25s}
+.i-val a:hover{color:var(--ink)}
+
+.map-box{
+  border:1px solid var(--platinum);background:var(--linen);
+  height:200px;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;margin-top:36px;
+}
+.map-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(154,140,122,.1),transparent 70%)}
+.map-pin-grp{display:flex;flex-direction:column;align-items:center;gap:9px;position:relative;z-index:1}
+.pin-icon{width:18px;height:25px;background:var(--charcoal);clip-path:polygon(50% 100%,0% 40%,15% 0%,85% 0%,100% 40%);animation:pinBnc 2.2s ease-in-out infinite}
+@keyframes pinBnc{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.pin-txt{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--silver-dk);text-align:center}
+
+.hrs-table{width:100%;border-collapse:collapse;margin-top:6px}
+.hrs-table tr{border-bottom:1px solid var(--linen)}
+.hrs-table td{padding:9px 0;font-family:'Cormorant',serif;font-size:clamp(15px,1.4vw,17px);color:var(--charcoal)}
+.hrs-table td:last-child{text-align:right;color:var(--ink)}
+
+.svc-list{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.svc-row{display:flex;align-items:center;gap:12px}
+.svc-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;flex-shrink:0}
+.svc-nm{font-family:'Cormorant',serif;font-size:17px;color:var(--charcoal)}
+
+/* ── CTA ── */
+.cta-sec{
+  padding:112px 8%;text-align:center;
+  background:var(--ink);position:relative;overflow:hidden;
+}
+.cta-sec::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(154,140,122,.08),transparent 70%);
+}
+.cta-over{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.cta-h{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,62px);font-weight:400;color:var(--cream);margin-bottom:14px}
+.cta-sub{font-family:'Cormorant',serif;font-size:clamp(16px,1.8vw,21px);color:rgba(250,248,244,.5);margin-bottom:44px}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-lt{font-size:10px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);background:var(--cream);padding:15px 34px;text-decoration:none;transition:all .3s;display:inline-block}
+.btn-lt:hover{background:var(--warm-white)}
+.btn-gh{font-size:10px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--cream);background:transparent;padding:15px 34px;text-decoration:none;border:1px solid rgba(250,248,244,.25);transition:all .3s;display:inline-block}
+.btn-gh:hover{border-color:rgba(250,248,244,.6)}
+
+/* ── FOOTER ── */
+footer{padding:60px 8% 36px;background:var(--ink);border-top:1px solid rgba(255,255,255,.06)}
+.ft-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px;margin-bottom:52px}
+.f-logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--cream);letter-spacing:.06em;margin-bottom:6px}
+.f-logo em{font-style:italic;color:var(--accent-lt)}
+.f-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(250,248,244,.3)}
+.ft-cols{display:flex;gap:56px;flex-wrap:wrap}
+.ft-col-ttl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent-lt);margin-bottom:18px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.ft-col a{font-size:12px;color:rgba(250,248,244,.38);text-decoration:none;transition:color .25s}
+.ft-col a:hover{color:rgba(250,248,244,.75)}
+.ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06)}
+.f-copy{font-size:10px;letter-spacing:.08em;color:rgba(250,248,244,.22)}
+.f-insta{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,248,244,.38);text-decoration:none;transition:color .25s}
+.f-insta:hover{color:var(--cream)}
+.insta-sq{width:20px;height:20px;border:1px solid rgba(250,248,244,.2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media(max-width:900px){
+  nav{padding:0 5%;height:60px}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-right{display:none}
+  .hero-left{padding:52px 6% 130px}
+
+  .stats-strip{left:0;right:0;position:static;margin-top:0;animation:fadeUp .9s ease .8s forwards}
+  .stat-item{padding:18px 0 18px 5%}
+
+  .about-grid,.visit-grid{grid-template-columns:1fr;gap:40px}
+  .col-grid{grid-template-columns:1fr 1fr;grid-template-rows:none}
+  .col-card:first-child{grid-column:1/3;grid-row:auto;aspect-ratio:16/10}
+  .col-card{aspect-ratio:3/4}
+  .q-grid{grid-template-columns:1fr}
+  .rv-header{flex-direction:column;align-items:flex-start}
+  .rating-blk{text-align:left}
+  .r-stars{justify-content:flex-start}
+  .rv-grid{grid-template-columns:1fr}
+  .sec{padding:72px 6%}
+  .cta-btns{flex-direction:column;align-items:center}
+  .btn-lt,.btn-gh{width:100%;max-width:300px;text-align:center}
+  .ft-top{flex-direction:column}
+  .ft-bot{flex-direction:column;text-align:center}
+}
+
+@media(max-width:480px){
+  .hero-left{padding:44px 5% 110px}
+  .hero-btns{flex-direction:column}
+  .btn-dk,.btn-ln{text-align:center}
+  .col-grid{grid-template-columns:1fr}
+  .col-card:first-child{grid-column:auto}
+  .col-card{aspect-ratio:4/3}
+  .ab-badges{grid-template-columns:1fr}
+  .stat-num{font-size:22px}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="curR"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Bafna <em>Silver</em> House</div>
+  <ul class="nav-links">
+    <li><a href="#about">Heritage</a></li>
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#purity">Purity</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a href="tel:+918888834365" class="nav-cta">+91 88888 34365</a>
+  <button class="hamburger" id="ham" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="m-menu" id="mMenu">
+  <a href="#about" onclick="toggleMenu()">Heritage</a>
+  <a href="#collections" onclick="toggleMenu()">Collections</a>
+  <a href="#purity" onclick="toggleMenu()">Purity</a>
+  <a href="#reviews" onclick="toggleMenu()">Reviews</a>
+  <a href="#visit" onclick="toggleMenu()">Visit</a>
+  <a href="tel:+918888834365" class="m-tel-btn">+91 88888 34365</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="eyebrow">
+      <div class="ey-rule"></div>
+      <span class="ey-txt">Nagpur's Finest · Est. 1983</span>
+    </div>
+    <h1 class="hero-h">Bafna<br><em>Silver</em><br>House</h1>
+    <p class="hero-tag">925 &amp; 999 · Wholesale Silver Jewellery</p>
+    <p class="hero-body">Four decades of exceptional silversmithing, rooted in tradition and elevated by artistry. Where purity is not promised — it is guaranteed.</p>
+    <div class="hero-btns">
+      <a href="#collections" class="btn-dk">Explore Collections</a>
+      <a href="https://instagram.com" target="_blank" class="btn-ln">Instagram</a>
+    </div>
+  </div>
+
+  <!-- Decorative right panel -->
+  <div class="hero-right">
+    <div class="float-card" style="top:13%;left:9%">
+      <div class="fc-lbl">Purity</div>
+      <div class="fc-val">925 &amp; 999</div>
+    </div>
+    <div class="float-card" style="bottom:16%;right:9%">
+      <div class="fc-lbl">Google Rating</div>
+      <div class="fc-val">4.9 ★</div>
+    </div>
+    <div class="diamond-wrap">
+      <div class="orbit-ring">
+        <div class="orb-dot"></div><div class="orb-dot"></div>
+        <div class="orb-dot"></div><div class="orb-dot"></div>
+      </div>
+      <svg class="dmnd" width="260" height="260" viewBox="0 0 260 260">
+        <defs>
+          <linearGradient id="dg1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f5f2ec"/>
+            <stop offset="35%" stop-color="#d6d3cc"/>
+            <stop offset="70%" stop-color="#b8b4ac"/>
+            <stop offset="100%" stop-color="#8a8780"/>
+          </linearGradient>
+          <linearGradient id="dg2" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ece8df"/>
+            <stop offset="55%" stop-color="#c4b9a8"/>
+            <stop offset="100%" stop-color="#9a8c7a"/>
+          </linearGradient>
+          <linearGradient id="dg3" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#8a8780"/>
+            <stop offset="100%" stop-color="#d6d3cc"/>
+          </linearGradient>
+          <filter id="gf"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <g filter="url(#gf)">
+          <polygon points="130,28 80,94 130,74 180,94" fill="url(#dg1)" opacity=".95"/>
+          <polygon points="130,28 180,94 232,94" fill="url(#dg2)" opacity=".78"/>
+          <polygon points="130,28 28,94 80,94" fill="url(#dg3)" opacity=".72"/>
+          <polygon points="80,94 130,74 130,174 40,160" fill="url(#dg2)" opacity=".84"/>
+          <polygon points="130,74 180,94 220,160 130,174" fill="url(#dg1)" opacity=".9"/>
+          <polygon points="28,94 80,94 40,160" fill="url(#dg3)" opacity=".62"/>
+          <polygon points="180,94 232,94 220,160" fill="url(#dg2)" opacity=".68"/>
+          <polygon points="40,160 130,174 130,234" fill="url(#dg3)" opacity=".78"/>
+          <polygon points="130,174 220,160 130,234" fill="url(#dg1)" opacity=".84"/>
+          <line x1="130" y1="28" x2="130" y2="234" stroke="rgba(255,255,255,.12)" stroke-width=".5"/>
+          <line x1="28" y1="94" x2="232" y2="94" stroke="rgba(255,255,255,.1)" stroke-width=".5"/>
+          <circle cx="98" cy="68" r="6" fill="white" opacity=".38"/>
+          <circle cx="158" cy="56" r="3" fill="white" opacity=".28"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- STATS STRIP (sits at bottom of hero-left) -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-num">40+</div>
+      <div class="stat-lbl">Years of Legacy</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4.9 ★</div>
+      <div class="stat-lbl">Star Rating</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">503</div>
+      <div class="stat-lbl">Happy Clients</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq-wrap">
+  <div class="mq-track">
+    <div class="mq-item"><div class="mq-gem"></div>925 Sterling Silver</div>
+    <div class="mq-item"><div class="mq-gem"></div>999 Fine Silver</div>
+    <div class="mq-item"><div class="mq-gem"></div>Wholesale Excellence</div>
+    <div class="mq-item"><div class="mq-gem"></div>Est. 1983</div>
+    <div class="mq-item"><div class="mq-gem"></div>Nagpur's Premier Jeweller</div>
+    <div class="mq-item"><div class="mq-gem"></div>Handcrafted Artistry</div>
+    <div class="mq-item"><div class="mq-gem"></div>Gift Wrapping Included</div>
+    <div class="mq-item"><div class="mq-gem"></div>925 Sterling Silver</div>
+    <div class="mq-item"><div class="mq-gem"></div>999 Fine Silver</div>
+    <div class="mq-item"><div class="mq-gem"></div>Wholesale Excellence</div>
+    <div class="mq-item"><div class="mq-gem"></div>Est. 1983</div>
+    <div class="mq-item"><div class="mq-gem"></div>Nagpur's Premier Jeweller</div>
+    <div class="mq-item"><div class="mq-gem"></div>Handcrafted Artistry</div>
+    <div class="mq-item"><div class="mq-gem"></div>Gift Wrapping Included</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="sec-ey reveal"><div class="sec-rl"></div><span class="sec-tg">Our Heritage</span></div>
+  <h2 class="sec-h reveal">A Legacy Forged<br><em>in Silver</em></h2>
+  <div class="about-grid">
+    <div class="about-body reveal">
+      <p>Since 1983, Bafna Silver House has been the heartbeat of silver jewellery in Nagpur. What began as a passionate pursuit of purity has blossomed into the city's most trusted wholesale destination for 925 and 999 silver.</p>
+      <p>Every piece carries four decades of expertise — where traditional craftsmanship meets contemporary elegance. Our artisans pour devotion into each anklet, bracelet, necklace, and ring that leaves our atelier.</p>
+      <p>We believe fine silver is not merely an accessory — it is a story, a memory, a gift that endures. That is why we hold ourselves to the highest standards of purity, design, and care.</p>
+    </div>
+    <div class="reveal d1">
+      <div class="ring-frame">
+        <svg class="ring-svg" width="220" height="220" viewBox="0 0 220 220">
+          <defs>
+            <radialGradient id="rg1" cx="40%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#f5f2ec"/><stop offset="45%" stop-color="#c4b9a8"/><stop offset="100%" stop-color="#8a8780"/>
+            </radialGradient>
+            <filter id="rs1"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <ellipse cx="110" cy="110" rx="86" ry="86" fill="none" stroke="url(#rg1)" stroke-width="22" filter="url(#rs1)"/>
+          <ellipse cx="110" cy="110" rx="86" ry="86" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1.5" stroke-dasharray="10 14"/>
+          <polygon points="110,52 126,68 110,62 94,68" fill="#f5f2ec" opacity=".88"/>
+          <polygon points="110,52 94,68 110,74 126,68" fill="#d6d3cc" opacity=".78"/>
+          <circle cx="89" cy="80" r="5" fill="white" opacity=".32"/>
+        </svg>
+      </div>
+      <div class="ab-badges">
+        <div class="ab-badge"><div class="ab-num">40+</div><div class="ab-lbl">Years of Mastery</div></div>
+        <div class="ab-badge"><div class="ab-num">925</div><div class="ab-lbl">Certified Purity</div></div>
+        <div class="ab-badge" style="grid-column:1/3">
+          <div class="ab-num" style="font-size:20px">Nagpur's Most Trusted</div>
+          <div class="ab-lbl">Wholesale Silver Jeweller Since 1983</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTIONS -->
+<section class="sec sec-alt" id="collections">
+  <div class="sec-ey reveal"><div class="sec-rl"></div><span class="sec-tg">The Collection</span></div>
+  <h2 class="sec-h reveal">Silver, <em>Reimagined</em></h2>
+  <div class="col-grid reveal">
+    <!-- 1 Anklet (featured, tall) -->
+    <div class="col-card">
+      <div class="c-vis v1">
+        <svg width="190" height="190" viewBox="0 0 190 190" style="animation:rSpin 10s linear infinite;filter:drop-shadow(0 4px 14px rgba(0,0,0,.11))">
+          <defs><radialGradient id="ag1" cx="40%" cy="30%" r="70%"><stop offset="0%" stop-color="#f5f2ec"/><stop offset="50%" stop-color="#b8b4ac"/><stop offset="100%" stop-color="#6a6760"/></radialGradient></defs>
+          <ellipse cx="95" cy="95" rx="74" ry="74" fill="none" stroke="url(#ag1)" stroke-width="17"/>
+          <ellipse cx="95" cy="95" rx="74" ry="74" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.5" stroke-dasharray="8 10"/>
+          <circle cx="95" cy="21" r="5.5" fill="#d6d3cc"/><circle cx="169" cy="95" r="4" fill="#b8b4ac"/>
+          <circle cx="95" cy="169" r="5.5" fill="#d6d3cc"/><circle cx="21" cy="95" r="4" fill="#b8b4ac"/>
+        </svg>
+      </div>
+      <div class="c-info"><div class="c-cat">Signature Piece</div><div class="c-ttl">Silver Anklets</div><div class="c-sub">Hand-finished 925 sterling — our most beloved creation since 1983.</div></div>
+    </div>
+    <!-- 2 Bracelets -->
+    <div class="col-card">
+      <div class="c-vis v2">
+        <svg width="145" height="105" viewBox="0 0 145 105" style="filter:drop-shadow(0 2px 10px rgba(0,0,0,.09))">
+          <defs><linearGradient id="br1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f5f2ec"/><stop offset="100%" stop-color="#8a8780"/></linearGradient></defs>
+          <ellipse cx="72" cy="52" rx="60" ry="36" fill="none" stroke="url(#br1)" stroke-width="13"/>
+          <ellipse cx="72" cy="52" rx="60" ry="36" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1" stroke-dasharray="5 8"/>
+        </svg>
+      </div>
+      <div class="c-info"><div class="c-cat">Collection</div><div class="c-ttl">Bracelets</div><div class="c-sub">Elegant silver bracelets for every occasion.</div></div>
+    </div>
+    <!-- 3 Necklaces -->
+    <div class="col-card">
+      <div class="c-vis v3">
+        <svg width="136" height="126" viewBox="0 0 136 126" style="filter:drop-shadow(0 2px 10px rgba(0,0,0,.09))">
+          <defs><linearGradient id="nc1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ece8df"/><stop offset="100%" stop-color="#8a8780"/></linearGradient></defs>
+          <path d="M16 22 Q68 74 120 22" fill="none" stroke="url(#nc1)" stroke-width="9" stroke-linecap="round"/>
+          <path d="M16 22 Q68 74 120 22" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.5" stroke-dasharray="5 7" stroke-linecap="round"/>
+          <polygon points="68,76 76,94 68,110 60,94" fill="#b8b4ac"/>
+          <polygon points="68,76 76,94 68,88" fill="white" opacity=".28"/>
+          <circle cx="68" cy="110" r="5" fill="#d6d3cc"/>
+        </svg>
+      </div>
+      <div class="c-info"><div class="c-cat">Collection</div><div class="c-ttl">Necklaces</div><div class="c-sub">Pendants &amp; chains in 925 &amp; 999 silver.</div></div>
+    </div>
+    <!-- 4 Rings -->
+    <div class="col-card">
+      <div class="c-vis v4">
+        <svg width="118" height="118" viewBox="0 0 118 118" style="filter:drop-shadow(0 2px 10px rgba(0,0,0,.09))">
+          <defs><radialGradient id="rn1" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#f5f2ec"/><stop offset="100%" stop-color="#6a6760"/></radialGradient></defs>
+          <circle cx="59" cy="59" r="42" fill="none" stroke="url(#rn1)" stroke-width="16"/>
+          <polygon points="59,30 68,49 59,44 50,49" fill="#e8eaed" opacity=".88"/>
+          <circle cx="46" cy="41" r="4" fill="white" opacity=".38"/>
+        </svg>
+      </div>
+      <div class="c-info"><div class="c-cat">Collection</div><div class="c-ttl">Rings</div><div class="c-sub">From classic bands to gemstone-set designs.</div></div>
+    </div>
+    <!-- 5 Lockets -->
+    <div class="col-card">
+      <div class="c-vis v5">
+        <svg width="108" height="148" viewBox="0 0 108 148" style="filter:drop-shadow(0 2px 10px rgba(0,0,0,.09))">
+          <defs><linearGradient id="lk1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e8e4dc"/><stop offset="100%" stop-color="#8a8780"/></linearGradient></defs>
+          <line x1="54" y1="0" x2="54" y2="27" stroke="#b8b4ac" stroke-width="4" stroke-linecap="round"/>
+          <rect x="21" y="27" width="66" height="86" rx="33" fill="none" stroke="url(#lk1)" stroke-width="8"/>
+          <rect x="21" y="27" width="66" height="86" rx="33" fill="rgba(232,228,220,.12)"/>
+          <text x="54" y="80" text-anchor="middle" font-size="26" fill="#b8b4ac" font-family="serif">ॐ</text>
+        </svg>
+      </div>
+      <div class="c-info"><div class="c-cat">Devotional</div><div class="c-ttl">Silver Lockets</div><div class="c-sub">Sacred Shiv Ji &amp; devotional collection.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PURITY -->
+<section class="sec" id="purity">
+  <div class="sec-ey reveal"><div class="sec-rl"></div><span class="sec-tg">Purity Promise</span></div>
+  <h2 class="sec-h reveal">The Bafna <em>Standard</em></h2>
+  <div class="q-grid">
+    <div class="q-card reveal">
+      <div class="q-num">925</div>
+      <div class="q-sub2">Sterling Silver</div>
+      <div class="q-ttl">Sterling Brilliance</div>
+      <p class="q-body">92.5% pure silver alloyed for durability and brilliance. Every hallmarked piece certified to international standards — crafted for a lifetime of wear.</p>
+    </div>
+    <div class="q-card reveal d1">
+      <div class="q-num">999</div>
+      <div class="q-sub2">Fine Silver</div>
+      <div class="q-ttl">Absolute Purity</div>
+      <p class="q-body">99.9% pure silver — the finest form of the metal. Traditionally crafted pieces of extraordinary purity and unmatched lustrous beauty.</p>
+    </div>
+    <div class="q-card reveal d2">
+      <svg width="40" height="40" viewBox="0 0 40 40" style="margin-bottom:24px">
+        <polygon points="20,3 25,15 38,15 28,23 32,36 20,28 8,36 12,23 2,15 15,15" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+      </svg>
+      <div class="q-ttl">Wholesale Value</div>
+      <p class="q-body">Competitive wholesale pricing without compromise on artisanship. Every customer receives the Bafna promise — quality, care, and beautiful gift packaging.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec sec-alt" id="reviews">
+  <div class="sec-ey reveal"><div class="sec-rl"></div><span class="sec-tg">Testimonials</span></div>
+  <h2 class="sec-h reveal">What Our <em>Patrons Say</em></h2>
+  <div class="rv-header reveal">
+    <p class="rv-intro">Over 500 verified reviews on Google. Nagpur's most trusted silver jeweller, celebrated by real customers for four decades of excellence.</p>
+    <div class="rating-blk">
+      <div class="r-big">4.9</div>
+      <div class="r-stars"><div class="r-star"></div><div class="r-star"></div><div class="r-star"></div><div class="r-star"></div><div class="r-star"></div></div>
+      <div class="r-cnt">503 Google Reviews</div>
+    </div>
+  </div>
+  <div class="rv-grid">
+    <div class="rv-card reveal">
+      <div class="rv-q">"</div>
+      <div class="rv-stars"><div class="rv-star"></div><div class="rv-star"></div><div class="rv-star"></div><div class="rv-star"></div><div class="rv-star"></div></div>
+      <p class="rv-txt">Very authentic shop. Very reasonable rates and wide range to choose from. Purchased a dual ring combo for my mother — beautiful packaging too. Best silver shop in Nagpur.</p>
+      <div class="rv-name">Nayankumar Raut</div>
+      <div class="rv-meta">Local Guide · 9 months ago</div>
+    </div>
+    <div class="rv-card reveal d1">
+      <div class="rv-q">"</div>
+      <div class="rv-stars"><div class="rv-star"></div><div class="rv-star"></div><div class="rv-star"></div><div class="rv-star"></div><div class="rv-star"></div></div>
+      <p class="rv-txt">Wonderful experience purchasing a Shiv Ji locket on Instagram. Authentic 925 silver, very reasonably priced. Fast delivery and great service. Definitely recommended!</p>
+      <div class="rv-name">Poonam Moon</div>
+      <div class="rv-meta">Verified Buyer · 2 months ago</div>
+    </div>
+    <div class="rv-card reveal d2">
+      <div class="rv-q">"</div>
+      <div class="rv-stars"><div class="rv-star"></div><div class="rv-star"></div><div class="rv-star"></div><div class="rv-star"></div><div class="rv-star"></div></div>
+      <p class="rv-txt">I bought a silver baby anklet from Bafna Silver House. The quality is top notch. I highly recommend buying silver from here — truly exceptional craftsmanship.</p>
+      <div class="rv-name">Ajinkya Fulzele</div>
+      <div class="rv-meta">Verified Buyer · 2 months ago</div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="sec" id="visit">
+  <div class="sec-ey reveal"><div class="sec-rl"></div><span class="sec-tg">Visit Us</span></div>
+  <h2 class="sec-h reveal">Find Our <em>Atelier</em></h2>
+  <div class="visit-grid">
+    <div>
+      <div class="i-row reveal">
+        <div class="i-lbl">Address</div>
+        <div class="i-val">Shop No. 2, Gajraj Arcade,<br>Opp. J M Thakar Marg, Ladpura,<br>Itwari, Nagpur — 440002</div>
+      </div>
+      <div class="i-row reveal d1">
+        <div class="i-lbl">Phone</div>
+        <div class="i-val"><a href="tel:+918888834365">+91 88888 34365</a></div>
+      </div>
+      <div class="i-row reveal d1">
+        <div class="i-lbl">Instagram</div>
+        <div class="i-val"><a href="https://instagram.com" target="_blank">@bafnasilverhouse</a></div>
+      </div>
+      <div class="i-row reveal d2">
+        <div class="i-lbl">Services</div>
+        <div class="svc-list">
+          <div class="svc-row"><div class="svc-dot"></div><span class="svc-nm">In-Store Shopping</span></div>
+          <div class="svc-row"><div class="svc-dot"></div><span class="svc-nm">Kerbside Pickup</span></div>
+          <div class="svc-row"><div class="svc-dot"></div><span class="svc-nm">Home Delivery via Instagram</span></div>
+          <div class="svc-row"><div class="svc-dot"></div><span class="svc-nm">Premium Gift Wrapping</span></div>
+        </div>
+      </div>
+      <div class="map-box reveal d2">
+        <div class="map-pin-grp">
+          <div class="pin-icon"></div>
+          <div class="pin-txt">Gajraj Arcade, Itwari<br>Nagpur, Maharashtra</div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal d1">
+      <div class="i-lbl" style="margin-bottom:18px">Opening Hours</div>
+      <table class="hrs-table">
+        <tr><td>Monday</td><td>10:00 AM – 8:30 PM</td></tr>
+        <tr><td>Tuesday</td><td>10:00 AM – 8:30 PM</td></tr>
+        <tr><td>Wednesday</td><td>10:00 AM – 8:30 PM</td></tr>
+        <tr><td>Thursday</td><td>10:00 AM – 8:30 PM</td></tr>
+        <tr><td>Friday</td><td>10:00 AM – 8:30 PM</td></tr>
+        <tr><td>Saturday</td><td>10:00 AM – 8:30 PM</td></tr>
+        <tr><td>Sunday</td><td style="color:var(--silver-dk)">By Appointment</td></tr>
+      </table>
+      <div style="margin-top:44px">
+        <div class="i-lbl" style="margin-bottom:14px">Quick Contact</div>
+        <a href="tel:+918888834365" class="btn-dk" style="display:inline-block;margin-bottom:10px">Call Now</a><br>
+        <a href="https://instagram.com" target="_blank" class="btn-ln" style="display:inline-block">Message on Instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <p class="cta-over reveal">Nagpur's Premier Silver Jeweller</p>
+  <h2 class="cta-h reveal">Begin Your<br><em>Silver Journey</em></h2>
+  <p class="cta-sub reveal">Visit us in Itwari, Nagpur or shop through Instagram</p>
+  <div class="cta-btns reveal">
+    <a href="tel:+918888834365" class="btn-lt">Call +91 88888 34365</a>
+    <a href="https://instagram.com" target="_blank" class="btn-gh">Shop on Instagram</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="f-logo">Bafna <em>Silver</em> House</div>
+      <div class="f-tag">925 &amp; 999 · Est. 1983 · Nagpur</div>
+    </div>
+    <div class="ft-cols">
+      <div class="ft-col">
+        <div class="ft-col-ttl">Collections</div>
+        <ul>
+          <li><a href="#">Anklets</a></li>
+          <li><a href="#">Bracelets</a></li>
+          <li><a href="#">Necklaces</a></li>
+          <li><a href="#">Rings</a></li>
+          <li><a href="#">Lockets</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <div class="ft-col-ttl">Company</div>
+        <ul>
+          <li><a href="#">Our Heritage</a></li>
+          <li><a href="#">Purity Standards</a></li>
+          <li><a href="#">Wholesale Inquiry</a></li>
+          <li><a href="#">Visit Store</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <div class="f-copy">© 2024 Bafna Silver House. All rights reserved. Nagpur, Maharashtra.</div>
+    <a href="https://instagram.com" target="_blank" class="f-insta">
+      <div class="insta-sq">✦</div>instagram.com
+    </a>
+  </div>
+</footer>
+
+<script>
+/* Custom cursor */
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+if(window.matchMedia('(hover:hover)').matches&&cur){
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+  (function a(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(a)})();
+  document.querySelectorAll('a,button,.col-card,.q-card,.rv-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(1.8)';curR.style.transform='translate(-50%,-50%) scale(1.4)'});
+    el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';curR.style.transform='translate(-50%,-50%) scale(1)'});
+  });
+}
+
+/* Mobile menu */
+function toggleMenu(){
+  const m=document.getElementById('mMenu'),h=document.getElementById('ham');
+  m.classList.toggle('open');
+  const sp=h.querySelectorAll('span');
+  if(m.classList.contains('open')){sp[0].style.transform='rotate(45deg) translate(4px,4px)';sp[1].style.opacity='0';sp[2].style.transform='rotate(-45deg) translate(4px,-4px)'}
+  else{sp.forEach(s=>{s.style.transform='';s.style.opacity=''})}
+}
+
+/* Scroll reveal */
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* Nav shadow on scroll */
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').style.boxShadow=window.scrollY>10?'0 2px 24px rgba(0,0,0,.06)':'none';
+});
+</script>
+</body>
+</html>
