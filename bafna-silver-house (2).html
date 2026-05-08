@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Bafna Silver House — Since 1983</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory:     #f9f6f0;
+  --cream:     #f2ede4;
+  --pearl:     #e8e0d4;
+  --stone:     #d4cbbf;
+  --warm-grey: #a89f94;
+  --slate:     #6e6560;
+  --ink:       #2a2420;
+  --deep-ink:  #1a1512;
+  --accent:    #8a7a6a;
+  --gold-muted: #c0a878;
+  --gold-warm:  #b09060;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--ivory);color:var(--ink);
+  font-family:'Jost',sans-serif;font-weight:300;
+  overflow-x:hidden;cursor:none;
+}
+/* CURSOR */
+.cursor,.cursor-ring{
+  position:fixed;pointer-events:none;z-index:9999;
+  border-radius:50%;transform:translate(-50%,-50%);
+}
+.cursor{width:6px;height:6px;background:var(--ink);transition:transform .1s;}
+.cursor-ring{width:30px;height:30px;border:1px solid rgba(42,36,32,.35);transition:all .18s ease;}
+@media(hover:none){.cursor,.cursor-ring{display:none;}body{cursor:auto;}}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:68px;padding:0 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(249,246,240,.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(168,159,148,.18);
+}
+.nav-brand{display:flex;flex-direction:column;}
+.nav-logo{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.22em;color:var(--ink);text-transform:uppercase;line-height:1;}
+.nav-sub{font-size:7.5px;letter-spacing:.3em;color:var(--warm-grey);text-transform:uppercase;margin-top:3px;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--slate);text-decoration:none;transition:color .25s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-call{
+  font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ivory);background:var(--ink);
+  padding:11px 22px;text-decoration:none;transition:background .3s;white-space:nowrap;
+}
+.nav-call:hover{background:var(--slate);}
+/* hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;}
+.hamburger span{width:22px;height:1px;background:var(--ink);display:block;transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+/* mobile drawer */
+.mobile-nav{
+  display:none;position:fixed;top:68px;left:0;right:0;
+  background:rgba(249,246,240,.98);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--pearl);
+  flex-direction:column;align-items:center;
+  z-index:998;padding-bottom:16px;
+  opacity:0;transform:translateY(-8px);
+  transition:all .3s ease;pointer-events:none;
+}
+.mobile-nav.open{opacity:1;transform:translateY(0);pointer-events:all;}
+.mobile-nav a{
+  font-size:10px;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;padding:15px 0;
+  width:100%;text-align:center;border-bottom:1px solid var(--pearl);
+}
+@media(max-width:840px){
+  .nav-links,.nav-call{display:none;}
+  .hamburger{display:flex;}
+  .mobile-nav{display:flex;}
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;padding-top:68px;
+  display:grid;grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:80px 5% 80px 8%;position:relative;z-index:2;
+}
+.hero-right{
+  position:relative;overflow:hidden;
+  background:linear-gradient(145deg,var(--cream) 0%,var(--pearl) 55%,var(--stone) 100%);
+}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:14px;margin-bottom:28px;
+  opacity:0;animation:fadeUp .9s ease .2s forwards;
+}
+.eyebrow-line{width:32px;height:1px;background:var(--gold-muted);}
+.eyebrow-text{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold-warm);}
+h1.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(44px,5.5vw,80px);
+  font-weight:400;line-height:1.06;color:var(--deep-ink);
+  margin-bottom:8px;
+  opacity:0;animation:fadeUp .9s ease .4s forwards;
+}
+.hero-italic{font-style:italic;color:var(--accent);display:block;}
+.hero-purity{
+  font-family:'Cinzel',serif;
+  font-size:clamp(11px,1.2vw,14px);letter-spacing:.35em;color:var(--warm-grey);
+  text-transform:uppercase;margin-bottom:32px;
+  opacity:0;animation:fadeUp .9s ease .55s forwards;
+}
+.hero-desc{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(16px,1.5vw,19px);line-height:1.88;color:var(--slate);
+  max-width:400px;margin-bottom:44px;
+  opacity:0;animation:fadeUp .9s ease .7s forwards;
+}
+.hero-btns{
+  display:flex;gap:12px;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .9s ease .85s forwards;
+}
+.btn-dark{
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ivory);background:var(--ink);
+  padding:14px 34px;text-decoration:none;border:1px solid var(--ink);
+  transition:all .3s;cursor:none;
+}
+.btn-dark:hover{background:var(--slate);border-color:var(--slate);}
+.btn-outline{
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink);background:transparent;
+  padding:14px 34px;text-decoration:none;border:1px solid rgba(42,36,32,.28);
+  transition:all .3s;cursor:none;
+}
+.btn-outline:hover{border-color:var(--ink);background:rgba(42,36,32,.03);}
+
+/* STATS — clear, well spaced */
+.hero-stats{
+  display:flex;margin-top:52px;
+  border-top:1px solid var(--pearl);padding-top:32px;
+  opacity:0;animation:fadeUp .9s ease 1s forwards;
+}
+.stat{flex:1;display:flex;flex-direction:column;gap:6px;}
+.stat+.stat{padding-left:24px;border-left:1px solid var(--pearl);}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(32px,3.2vw,44px);
+  font-weight:400;color:var(--deep-ink);line-height:1;
+}
+.stat-num sup{font-size:.45em;vertical-align:super;color:var(--gold-warm);}
+.stat-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--warm-grey);line-height:1.55;}
+
+/* Hero right ring scene */
+.ring-stage{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.ring-stage::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(168,159,148,.09) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(168,159,148,.09) 1px,transparent 1px);
+  background-size:36px 36px;
+}
+.ring-float{
+  position:relative;z-index:2;
+  animation:floatY 5s ease-in-out infinite;
+}
+@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
+.ring-glow{
+  position:absolute;inset:-50px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(248,244,236,.7) 0%,transparent 70%);
+  animation:glowBreath 4s ease-in-out infinite alternate;
+}
+@keyframes glowBreath{from{opacity:.6;transform:scale(.96);}to{opacity:1;transform:scale(1.04);}}
+.rl{
+  position:absolute;
+  font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink);background:rgba(249,246,240,.88);backdrop-filter:blur(8px);
+  padding:9px 16px;border:1px solid var(--stone);
+  display:flex;align-items:center;gap:8px;white-space:nowrap;
+}
+.rl::before{content:'';width:18px;height:1px;background:var(--gold-muted);}
+.rl-1{top:22%;right:6%;animation:floatLbl 3.8s ease-in-out infinite;}
+.rl-2{bottom:24%;left:4%;animation:floatLbl 3.8s ease-in-out infinite 1.9s;}
+@keyframes floatLbl{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+
+/* scroll hint */
+.scroll-hint{
+  position:absolute;bottom:32px;right:5%;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;animation:fadeUp .9s ease 1.2s forwards;
+}
+.s-line{
+  width:1px;height:48px;
+  background:linear-gradient(180deg,var(--gold-muted),transparent);
+  animation:sLine 2s ease-in-out infinite;
+}
+@keyframes sLine{
+  0%{transform:scaleY(0);transform-origin:top;}
+  50%{transform:scaleY(1);transform-origin:top;}
+  51%{transform:scaleY(1);transform-origin:bottom;}
+  100%{transform:scaleY(0);transform-origin:bottom;}
+}
+.s-txt{font-size:7px;letter-spacing:.3em;text-transform:uppercase;color:var(--warm-grey);writing-mode:vertical-rl;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+
+/* MARQUEE */
+.mq-wrap{background:var(--ink);overflow:hidden;padding:13px 0;}
+.mq-track{display:flex;white-space:nowrap;animation:mqScroll 22s linear infinite;}
+@keyframes mqScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.mi{
+  display:inline-flex;align-items:center;gap:22px;padding:0 30px;
+  font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(249,246,240,.55);
+}
+.mi-dot{width:4px;height:4px;background:var(--gold-muted);border-radius:50%;flex-shrink:0;}
+
+/* SECTIONS */
+.sec{padding:100px 8%;}
+.sec-cream{background:var(--cream);}
+.sec-dark{background:var(--ink);}
+
+.tag-row{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.tag-line{width:28px;height:1px;background:var(--gold-muted);}
+.tag{font-size:8.5px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold-warm);}
+.sec-dark .tag{color:rgba(192,168,120,.75);}
+.sec-dark .tag-line{background:var(--gold-muted);}
+
+h2.st{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(30px,4vw,54px);font-weight:400;line-height:1.1;color:var(--deep-ink);
+}
+h2.st em{font-style:italic;color:var(--accent);}
+.sec-dark h2.st{color:var(--ivory);}
+.sec-dark h2.st em{color:var(--gold-muted);}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-grid h2.st{margin-bottom:26px;}
+.about-body{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(15px,1.45vw,18px);line-height:1.9;color:var(--slate);
+}
+.about-body p+p{margin-top:18px;}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;}
+.pill{
+  font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--slate);border:1px solid var(--pearl);padding:9px 16px;
+  transition:all .3s;
+}
+.pill:hover{border-color:var(--stone);background:var(--cream);}
+/* visual box */
+.av{position:relative;}
+.av-img{
+  width:100%;aspect-ratio:3/4;
+  background:linear-gradient(145deg,var(--cream),var(--pearl),var(--stone));
+  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+}
+.av-img::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 40% 40%,rgba(249,246,240,.5) 0%,transparent 60%);
+}
+.av-badge{
+  position:absolute;bottom:-22px;right:-22px;
+  width:114px;height:114px;background:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;z-index:2;
+}
+.av-badge-n{font-family:'Playfair Display',serif;font-size:30px;color:var(--ivory);line-height:1;}
+.av-badge-l{font-size:7px;letter-spacing:.18em;text-transform:uppercase;color:var(--warm-grey);text-align:center;line-height:1.6;}
+.av-accent{
+  position:absolute;top:-22px;left:-22px;
+  background:var(--gold-muted);padding:18px 22px;z-index:2;
+}
+.av-accent-n{font-family:'Playfair Display',serif;font-size:26px;color:var(--ivory);line-height:1;}
+.av-accent-l{font-size:7px;letter-spacing:.16em;text-transform:uppercase;color:rgba(249,246,240,.75);margin-top:3px;}
+
+/* COLLECTIONS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:3px;margin-top:56px;}
+.cc{position:relative;overflow:hidden;cursor:none;}
+.cc-feat{grid-column:1/2;grid-row:1/3;min-height:560px;}
+.cc:not(.cc-feat){min-height:275px;}
+.cc-art{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .7s cubic-bezier(.25,.46,.45,.94);
+}
+.cc:hover .cc-art{transform:scale(1.06);}
+.cc-grad{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(26,21,18,.88) 0%,rgba(26,21,18,.08) 55%,transparent 100%);
+}
+.cc-info{
+  position:absolute;bottom:0;left:0;right:0;padding:26px 22px;
+  transform:translateY(6px);transition:transform .35s ease;z-index:2;
+}
+.cc:hover .cc-info{transform:translateY(0);}
+.cc-cat{font-size:7.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-muted);margin-bottom:5px;}
+.cc-nm{font-family:'Playfair Display',serif;font-size:clamp(17px,1.8vw,22px);color:#f9f6f0;line-height:1.15;}
+.cc-sub{font-size:11px;color:rgba(249,246,240,.52);margin-top:5px;line-height:1.5;opacity:0;transition:opacity .35s ease .08s;}
+.cc:hover .cc-sub{opacity:1;}
+.bg-a{background:linear-gradient(135deg,#ddd8d0,#c0b8b0);}
+.bg-b{background:linear-gradient(135deg,#e2ddd6,#cec6be);}
+.bg-c{background:linear-gradient(135deg,#d8d4ce,#c2bab4);}
+.bg-d{background:linear-gradient(135deg,#e0dcd6,#cac2ba);}
+.bg-e{background:linear-gradient(135deg,#dcd8d2,#c6beb8);}
+
+/* QUALITY */
+.qg{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px;}
+.qc{
+  padding:50px 34px;border:1px solid var(--pearl);background:var(--ivory);
+  position:relative;overflow:hidden;transition:all .35s ease;
+}
+.qc::before{
+  content:'';position:absolute;top:0;left:0;
+  width:2px;height:0;background:var(--gold-muted);
+  transition:height .4s ease;
+}
+.qc:hover::before{height:100%;}
+.qc:hover{background:var(--cream);}
+.qm{font-family:'Cinzel',serif;font-size:40px;color:var(--deep-ink);line-height:1;margin-bottom:4px;}
+.qp{font-size:8.5px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-warm);margin-bottom:24px;}
+.qt{font-family:'Playfair Display',serif;font-size:19px;color:var(--deep-ink);margin-bottom:12px;}
+.qb{font-family:'Playfair Display',serif;font-size:clamp(14px,1.3vw,15.5px);line-height:1.85;color:var(--slate);}
+
+/* REVIEWS */
+.rv-score-row{display:flex;align-items:center;gap:28px;margin-top:8px;margin-bottom:56px;}
+.rv-big{font-family:'Playfair Display',serif;font-size:72px;color:var(--ivory);line-height:1;}
+.rv-meta{display:flex;flex-direction:column;gap:8px;}
+.stars-r{display:flex;gap:4px;}
+.sv{width:15px;height:15px;fill:var(--gold-muted);}
+.rv-cnt{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--warm-grey);}
+.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.rc{
+  padding:38px 30px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  transition:all .35s;position:relative;
+}
+.rc:hover{background:rgba(255,255,255,.07);border-color:rgba(192,168,120,.18);}
+.rc-quote{
+  font-family:'Playfair Display',serif;
+  font-size:44px;line-height:.8;color:rgba(192,168,120,.2);margin-bottom:6px;
+}
+.rc-stars{display:flex;gap:4px;margin-bottom:16px;}
+.rsv{width:11px;height:11px;fill:var(--gold-muted);}
+.rc-txt{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(14px,1.35vw,16.5px);line-height:1.85;color:rgba(249,246,240,.72);margin-bottom:24px;
+}
+.rc-name{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ivory);}
+.rc-when{font-size:8.5px;letter-spacing:.1em;color:var(--warm-grey);text-transform:uppercase;margin-top:2px;}
+
+/* VISIT */
+.vg{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
+.ir{margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--pearl);}
+.ir:last-child{border-bottom:none;margin-bottom:0;}
+.il{font-size:8px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-warm);margin-bottom:7px;}
+.iv{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(15px,1.4vw,18px);color:var(--ink);line-height:1.65;
+}
+.iv a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--stone);transition:border-color .3s;}
+.iv a:hover{border-color:var(--ink);}
+.svc-l{display:flex;flex-direction:column;gap:0;margin-top:6px;}
+.svc-i{
+  display:flex;align-items:center;gap:14px;
+  padding:12px 0;border-bottom:1px solid var(--pearl);
+  font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);
+}
+.svc-d{width:5px;height:5px;border-radius:50%;background:var(--gold-muted);flex-shrink:0;}
+.htbl{width:100%;border-collapse:collapse;margin-top:6px;}
+.htbl td{padding:9px 0;border-bottom:1px solid var(--pearl);font-size:13px;color:var(--slate);}
+.htbl td:last-child{text-align:right;color:var(--ink);}
+.map-box{
+  height:260px;background:var(--cream);border:1px solid var(--pearl);
+  position:relative;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;margin-top:28px;
+}
+.map-box::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(168,159,148,.11) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(168,159,148,.11) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+.map-pg{display:flex;flex-direction:column;align-items:center;gap:10px;z-index:2;}
+.map-pin{animation:pinB 2.2s ease-in-out infinite;}
+@keyframes pinB{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+.map-lbl{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.16em;color:var(--ink);text-align:center;line-height:1.6;}
+
+/* CTA STRIP */
+.cta{
+  background:var(--ink);padding:96px 8%;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta::before{
+  content:'BAFNA';
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Cinzel',serif;font-size:clamp(80px,14vw,190px);
+  color:rgba(255,255,255,.018);letter-spacing:.25em;white-space:nowrap;pointer-events:none;
+}
+.cta-ey{font-size:8.5px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold-muted);margin-bottom:18px;}
+.cta-h{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(30px,4.5vw,60px);font-weight:400;color:var(--ivory);
+  margin-bottom:14px;line-height:1.1;
+}
+.cta-h em{font-style:italic;color:var(--gold-muted);}
+.cta-s{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(15px,1.5vw,18px);color:var(--warm-grey);margin-bottom:44px;
+}
+.cta-bs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-ivory{
+  font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink);background:var(--ivory);
+  padding:14px 34px;text-decoration:none;border:1px solid var(--ivory);
+  transition:all .3s;cursor:none;
+}
+.btn-ivory:hover{background:var(--cream);}
+.btn-gl{
+  font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ivory);background:transparent;
+  padding:14px 34px;text-decoration:none;border:1px solid rgba(249,246,240,.22);
+  transition:all .3s;cursor:none;
+}
+.btn-gl:hover{border-color:rgba(249,246,240,.55);}
+
+/* FOOTER */
+footer{background:var(--deep-ink);padding:60px 8% 34px;}
+.ft{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.06);
+  flex-wrap:wrap;gap:36px;
+}
+.f-logo{font-family:'Cinzel',serif;font-size:15px;letter-spacing:.2em;color:var(--ivory);text-transform:uppercase;margin-bottom:5px;}
+.f-sub{font-size:7.5px;letter-spacing:.28em;color:var(--warm-grey);text-transform:uppercase;}
+.fcols{display:flex;gap:56px;flex-wrap:wrap;}
+.fct{font-size:7.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-muted);margin-bottom:16px;}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.fc a{font-size:12px;letter-spacing:.07em;color:var(--warm-grey);text-decoration:none;transition:color .25s;}
+.fc a:hover{color:var(--ivory);}
+.fb{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:26px;flex-wrap:wrap;gap:10px;
+}
+.fc-copy{font-size:9.5px;letter-spacing:.08em;color:rgba(255,255,255,.22);}
+.f-ig{
+  font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold-muted);text-decoration:none;
+  display:flex;align-items:center;gap:8px;transition:opacity .3s;
+}
+.f-ig:hover{opacity:.7;}
+.ig-box{
+  width:22px;height:22px;border:1px solid var(--gold-muted);
+  border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;
+}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .72s ease,transform .72s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:.1s;}.rd2{transition-delay:.2s;}.rd3{transition-delay:.3s;}
+
+/* MOBILE */
+@media(max-width:840px){
+  .sec{padding:68px 5%;}
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:44px 5% 36px;order:1;}
+  .hero-right{order:2;height:320px;}
+  .hero-stats{margin-top:36px;padding-top:28px;}
+  .stat-num{font-size:28px;}
+  .stat-label{font-size:8px;}
+  .rl{display:none;}
+  .scroll-hint{display:none;}
+  .about-grid{grid-template-columns:1fr;gap:36px;}
+  .av{display:none;}
+  .cg{grid-template-columns:1fr 1fr;}
+  .cc-feat{grid-column:1/3;grid-row:auto;min-height:320px;}
+  .cc:not(.cc-feat){min-height:195px;}
+  .qg{grid-template-columns:1fr;}
+  .qc{padding:36px 26px;}
+  .rg{grid-template-columns:1fr;}
+  .rv-score-row{gap:18px;margin-bottom:36px;}
+  .rv-big{font-size:56px;}
+  .vg{grid-template-columns:1fr;gap:44px;}
+  .fcols{display:none;}
+}
+@media(max-width:480px){
+  h1.hero-title{font-size:38px;}
+  .hero-right{height:260px;}
+  .hero-stats{flex-direction:row;}
+  .stat+.stat{padding-left:16px;}
+  .cg{grid-template-columns:1fr;}
+  .cc-feat{grid-column:1;min-height:280px;}
+  .cta-bs{flex-direction:column;align-items:stretch;}
+  .cta-bs a{text-align:center;}
+  .hero-btns{flex-direction:column;}
+  .hero-btns a{text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="crng"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo">Bafna Silver House</div>
+    <div class="nav-sub">Since 1983 · Nagpur</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">Heritage</a></li>
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#purity">Purity</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a href="tel:+918888834365" class="nav-call">+91 88888 34365</a>
+  <button class="hamburger" id="burg" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-nav" id="mnav">
+  <a href="#about">Heritage</a>
+  <a href="#collections">Collections</a>
+  <a href="#purity">Purity</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#visit">Visit</a>
+  <a href="tel:+918888834365" style="color:var(--gold-warm)">+91 88888 34365</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Nagpur's Finest · Est. 1983</span>
+    </div>
+    <h1 class="hero-title">
+      Bafna
+      <span class="hero-italic">Silver House</span>
+    </h1>
+    <p class="hero-purity">925 &amp; 999 · Wholesale Silver Jewellers</p>
+    <p class="hero-desc">Four decades of masterful silversmithing. Where purity meets artistry — crafting heirloom pieces that endure through generations.</p>
+    <div class="hero-btns">
+      <a href="#collections" class="btn-dark">Explore Collections</a>
+      <a href="https://instagram.com" target="_blank" class="btn-outline">Instagram</a>
+    </div>
+
+    <!-- STATS -->
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">40<sup>+</sup></div>
+        <div class="stat-label">Years of<br>Legacy</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4.9<sup>★</sup></div>
+        <div class="stat-label">Star<br>Rating</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">503</div>
+        <div class="stat-label">Happy<br>Clients</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO RIGHT -->
+  <div class="hero-right">
+    <div class="ring-stage">
+      <div class="ring-float">
+        <div class="ring-glow"></div>
+        <svg width="290" height="290" viewBox="0 0 290 290" style="filter:drop-shadow(0 28px 56px rgba(42,36,32,.2)) drop-shadow(0 4px 12px rgba(192,168,120,.2))">
+          <defs>
+            <radialGradient id="rg" cx="33%" cy="25%" r="78%">
+              <stop offset="0%" stop-color="#f4efe7"/>
+              <stop offset="30%" stop-color="#d8d0c4"/>
+              <stop offset="65%" stop-color="#a89f94"/>
+              <stop offset="100%" stop-color="#6e6560"/>
+            </radialGradient>
+            <radialGradient id="rg2" cx="65%" cy="70%" r="55%">
+              <stop offset="0%" stop-color="#fff" stop-opacity=".45"/>
+              <stop offset="100%" stop-color="#a89f94" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="145" cy="145" r="114" fill="none" stroke="url(#rg)" stroke-width="30"/>
+          <circle cx="145" cy="145" r="114" fill="none" stroke="url(#rg2)" stroke-width="30"/>
+          <circle cx="145" cy="145" r="99" fill="none" stroke="rgba(240,236,228,.3)" stroke-width="1"/>
+          <circle cx="145" cy="145" r="129" fill="none" stroke="rgba(110,101,96,.16)" stroke-width="1"/>
+          <!-- top diamond gem -->
+          <g transform="translate(145,22)">
+            <polygon points="0,-11 10,0 0,11 -10,0" fill="#f2f4f6" stroke="#d0c8c0" stroke-width="1"/>
+            <polygon points="0,-11 10,0 0,1" fill="white" opacity=".55"/>
+            <polygon points="0,1 10,0 0,11" fill="#b8b0a8" opacity=".38"/>
+          </g>
+          <!-- side gems -->
+          <circle cx="145" cy="268" r="5" fill="#e4dcd0" stroke="#c0a878" stroke-width="1.2"/>
+          <circle cx="269" cy="145" r="4" fill="#e4dcd0" stroke="#c0a878" stroke-width="1"/>
+          <circle cx="21"  cy="145" r="4" fill="#e4dcd0" stroke="#c0a878" stroke-width="1"/>
+          <!-- decorative dashes -->
+          <circle cx="145" cy="145" r="108" fill="none" stroke="rgba(168,159,148,.12)" stroke-width="1" stroke-dasharray="3 9"/>
+          <circle cx="145" cy="145" r="120" fill="none" stroke="rgba(168,159,148,.08)" stroke-width="1" stroke-dasharray="2 14"/>
+          <circle cx="145" cy="145" r="96" fill="rgba(232,224,212,.06)"/>
+        </svg>
+      </div>
+      <div class="rl rl-1">925 Sterling</div>
+      <div class="rl rl-2">Since 1983</div>
+    </div>
+    <div class="scroll-hint">
+      <div class="s-line"></div>
+      <span class="s-txt">Scroll</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq-wrap">
+  <div class="mq-track">
+    <span class="mi"><span class="mi-dot"></span>925 Sterling Silver</span>
+    <span class="mi"><span class="mi-dot"></span>999 Fine Silver</span>
+    <span class="mi"><span class="mi-dot"></span>Wholesale Excellence</span>
+    <span class="mi"><span class="mi-dot"></span>Est. 1983 · Nagpur</span>
+    <span class="mi"><span class="mi-dot"></span>Handcrafted Jewellery</span>
+    <span class="mi"><span class="mi-dot"></span>4.9 ★ Rating</span>
+    <span class="mi"><span class="mi-dot"></span>925 Sterling Silver</span>
+    <span class="mi"><span class="mi-dot"></span>999 Fine Silver</span>
+    <span class="mi"><span class="mi-dot"></span>Wholesale Excellence</span>
+    <span class="mi"><span class="mi-dot"></span>Est. 1983 · Nagpur</span>
+    <span class="mi"><span class="mi-dot"></span>Handcrafted Jewellery</span>
+    <span class="mi"><span class="mi-dot"></span>4.9 ★ Rating</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="about-grid">
+    <div>
+      <div class="tag-row reveal"><div class="tag-line"></div><span class="tag">Our Heritage</span></div>
+      <h2 class="st reveal">A Legacy <em>Forged</em><br>in Silver</h2>
+      <div class="about-body reveal rd1">
+        <p>Since 1983, Bafna Silver House has been the heartbeat of silver jewellery in Nagpur. What began as a passionate pursuit of purity has blossomed into the city's most trusted wholesale destination for 925 and 999 silver.</p>
+        <p>Every piece carries four decades of expertise — where traditional craftsmanship meets contemporary elegance. Fine silver is not merely an accessory; it is a story, a memory, a gift that endures.</p>
+      </div>
+      <div class="pills reveal rd2">
+        <div class="pill">In-Store Shopping</div>
+        <div class="pill">Home Delivery</div>
+        <div class="pill">Kerbside Pickup</div>
+        <div class="pill">Gift Wrapping</div>
+        <div class="pill">Wholesale</div>
+      </div>
+    </div>
+    <div class="av reveal rd1">
+      <div class="av-img">
+        <svg width="180" height="180" viewBox="0 0 180 180" style="opacity:.65;filter:drop-shadow(0 6px 20px rgba(42,36,32,.1))">
+          <defs>
+            <radialGradient id="ag" cx="33%" cy="28%" r="72%">
+              <stop offset="0%" stop-color="#f4efe7"/>
+              <stop offset="55%" stop-color="#a89f94"/>
+              <stop offset="100%" stop-color="#6e6560"/>
+            </radialGradient>
+          </defs>
+          <circle cx="90" cy="90" r="68" fill="none" stroke="url(#ag)" stroke-width="20"/>
+          <circle cx="90" cy="22" r="7" fill="#c0a878"/>
+          <polygon points="90,18 97,28 90,32 83,28" fill="white" opacity=".45"/>
+        </svg>
+      </div>
+      <div class="av-badge">
+        <div class="av-badge-n">40<span style="font-size:14px">+</span></div>
+        <div class="av-badge-l">Years of<br>Mastery</div>
+      </div>
+      <div class="av-accent">
+        <div class="av-accent-n">503</div>
+        <div class="av-accent-l">Happy Clients</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTIONS -->
+<section class="sec sec-cream" id="collections">
+  <div class="tag-row reveal"><div class="tag-line"></div><span class="tag">The Collection</span></div>
+  <h2 class="st reveal">Silver <em>Reimagined</em></h2>
+  <div class="cg">
+    <!-- featured anklet -->
+    <div class="cc cc-feat reveal">
+      <div class="cc-art bg-a">
+        <svg width="210" height="210" viewBox="0 0 210 210" style="filter:drop-shadow(0 6px 26px rgba(42,36,32,.18))">
+          <defs>
+            <radialGradient id="cg1" cx="33%" cy="28%" r="72%">
+              <stop offset="0%" stop-color="#f4efe7"/>
+              <stop offset="50%" stop-color="#b8b0a8"/>
+              <stop offset="100%" stop-color="#6e6560"/>
+            </radialGradient>
+          </defs>
+          <circle cx="105" cy="105" r="84" fill="none" stroke="url(#cg1)" stroke-width="20"/>
+          <circle cx="105" cy="105" r="84" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="20"/>
+          <circle cx="105" cy="105" r="84" fill="none" stroke="rgba(42,36,32,.08)" stroke-width="1" stroke-dasharray="5 9"/>
+          <circle cx="105" cy="21" r="7" fill="#ddd8d0" stroke="#c0a878" stroke-width="1.5"/>
+          <circle cx="189" cy="105" r="5" fill="#ddd8d0" stroke="#c0a878" stroke-width="1"/>
+          <circle cx="105" cy="189" r="7" fill="#ddd8d0" stroke="#c0a878" stroke-width="1.5"/>
+          <circle cx="21"  cy="105" r="5" fill="#ddd8d0" stroke="#c0a878" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="cc-grad"></div>
+      <div class="cc-info">
+        <div class="cc-cat">Signature Piece</div>
+        <div class="cc-nm">Silver Anklets</div>
+        <div class="cc-sub">Hand-finished 925 sterling anklets — our most beloved creation since 1983.</div>
+      </div>
+    </div>
+    <!-- bracelets -->
+    <div class="cc reveal rd1">
+      <div class="cc-art bg-b">
+        <svg width="130" height="92" viewBox="0 0 130 92" style="filter:drop-shadow(0 3px 14px rgba(42,36,32,.15))">
+          <defs><linearGradient id="cg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f4efe7"/><stop offset="100%" stop-color="#6e6560"/></linearGradient></defs>
+          <ellipse cx="65" cy="46" rx="54" ry="32" fill="none" stroke="url(#cg2)" stroke-width="13"/>
+          <ellipse cx="65" cy="46" rx="54" ry="32" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="13"/>
+        </svg>
+      </div>
+      <div class="cc-grad"></div>
+      <div class="cc-info">
+        <div class="cc-cat">Collection</div>
+        <div class="cc-nm">Bracelets</div>
+        <div class="cc-sub">Elegant silver bracelets for every occasion.</div>
+      </div>
+    </div>
+    <!-- necklaces -->
+    <div class="cc reveal rd2">
+      <div class="cc-art bg-c">
+        <svg width="130" height="120" viewBox="0 0 130 120" style="filter:drop-shadow(0 3px 14px rgba(42,36,32,.12))">
+          <defs><linearGradient id="cg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f4efe7"/><stop offset="100%" stop-color="#6e6560"/></linearGradient></defs>
+          <path d="M14 16 Q65 68 116 16" fill="none" stroke="url(#cg3)" stroke-width="7" stroke-linecap="round"/>
+          <path d="M14 16 Q65 68 116 16" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="7" stroke-linecap="round"/>
+          <polygon points="65,70 73,88 65,105 57,88" fill="#c0a878" stroke="#e4dcd0" stroke-width="1"/>
+          <circle cx="65" cy="107" r="4.5" fill="#e4dcd0"/>
+        </svg>
+      </div>
+      <div class="cc-grad"></div>
+      <div class="cc-info">
+        <div class="cc-cat">Collection</div>
+        <div class="cc-nm">Necklaces</div>
+        <div class="cc-sub">Pendants and chains in 925 & 999 silver.</div>
+      </div>
+    </div>
+    <!-- rings -->
+    <div class="cc reveal rd1">
+      <div class="cc-art bg-d">
+        <svg width="112" height="112" viewBox="0 0 112 112" style="filter:drop-shadow(0 3px 14px rgba(42,36,32,.15))">
+          <defs><radialGradient id="cg4" cx="33%" cy="28%" r="72%"><stop offset="0%" stop-color="#f4efe7"/><stop offset="100%" stop-color="#6e6560"/></radialGradient></defs>
+          <circle cx="56" cy="56" r="40" fill="none" stroke="url(#cg4)" stroke-width="17"/>
+          <circle cx="56" cy="56" r="40" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="17"/>
+          <polygon points="56,28 66,46 56,52 46,46" fill="#f0f4f8" opacity=".9"/>
+          <polygon points="56,28 66,46 56,38" fill="white" opacity=".5"/>
+        </svg>
+      </div>
+      <div class="cc-grad"></div>
+      <div class="cc-info">
+        <div class="cc-cat">Collection</div>
+        <div class="cc-nm">Rings</div>
+        <div class="cc-sub">From classic bands to gemstone masterpieces.</div>
+      </div>
+    </div>
+    <!-- lockets -->
+    <div class="cc reveal rd2">
+      <div class="cc-art bg-e">
+        <svg width="92" height="130" viewBox="0 0 92 130" style="filter:drop-shadow(0 3px 14px rgba(42,36,32,.12))">
+          <defs><linearGradient id="cg5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f4efe7"/><stop offset="100%" stop-color="#6e6560"/></linearGradient></defs>
+          <line x1="46" y1="0" x2="46" y2="20" stroke="#c0a878" stroke-width="2.5" stroke-linecap="round"/>
+          <rect x="14" y="20" width="64" height="86" rx="32" fill="none" stroke="url(#cg5)" stroke-width="7"/>
+          <rect x="14" y="20" width="64" height="86" rx="32" fill="rgba(240,236,228,.06)"/>
+          <text x="46" y="76" text-anchor="middle" font-size="24" fill="#c0a878" font-family="serif" opacity=".85">ॐ</text>
+        </svg>
+      </div>
+      <div class="cc-grad"></div>
+      <div class="cc-info">
+        <div class="cc-cat">Devotional</div>
+        <div class="cc-nm">Silver Lockets</div>
+        <div class="cc-sub">Sacred lockets including our Shiv Ji collection.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PURITY -->
+<section class="sec" id="purity">
+  <div class="tag-row reveal"><div class="tag-line"></div><span class="tag">Purity Promise</span></div>
+  <h2 class="st reveal">The Bafna <em>Standard</em></h2>
+  <div class="qg">
+    <div class="qc reveal">
+      <div class="qm">925</div>
+      <div class="qp">Sterling Silver</div>
+      <div class="qt">The Classic Choice</div>
+      <p class="qb">92.5% pure silver, alloyed for durability and brilliance. Every hallmarked piece certified to international standards — built to last a lifetime and beyond.</p>
+    </div>
+    <div class="qc reveal rd1">
+      <div class="qm">999</div>
+      <div class="qp">Fine Silver</div>
+      <div class="qt">The Purest Form</div>
+      <p class="qb">99.9% pure silver for those who demand absolute perfection. Traditionally crafted pieces of extraordinary purity and unmatched lustrous beauty.</p>
+    </div>
+    <div class="qc reveal rd2">
+      <div style="margin-bottom:5px">
+        <svg width="40" height="40" viewBox="0 0 40 40"><polygon points="20,2 25,14 38,14 28,22 31,35 20,28 9,35 12,22 2,14 15,14" fill="none" stroke="var(--gold-muted)" stroke-width="1.5"/><polygon points="20,2 25,14 38,14 28,22 31,35 20,28 9,35 12,22 2,14 15,14" fill="rgba(192,168,120,.06)"/></svg>
+      </div>
+      <div class="qp">Wholesale</div>
+      <div class="qt">Trade Excellence</div>
+      <p class="qb">Competitive wholesale pricing without compromise on craft. Whether a single gift or a full collection, every customer receives the Bafna promise of excellence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec sec-dark" id="reviews">
+  <div class="tag-row reveal"><div class="tag-line"></div><span class="tag">Client Testimonials</span></div>
+  <h2 class="st reveal">What Our Patrons <em>Say</em></h2>
+  <div class="rv-score-row reveal">
+    <div class="rv-big">4.9</div>
+    <div class="rv-meta">
+      <div class="stars-r">
+        <svg class="sv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="sv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="sv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="sv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="sv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+      </div>
+      <div class="rv-cnt">503 Google Reviews</div>
+    </div>
+  </div>
+  <div class="rg">
+    <div class="rc reveal">
+      <div class="rc-quote">"</div>
+      <div class="rc-stars">
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+      </div>
+      <p class="rc-txt">Very authentic shop with reasonable rates and a wide range to choose from. I purchased a dual ring combo for my mother — beautiful packaging too. Best silver shop in Nagpur.</p>
+      <div class="rc-name">Nayankumar Raut</div>
+      <div class="rc-when">Local Guide · 9 months ago</div>
+    </div>
+    <div class="rc reveal rd1">
+      <div class="rc-quote">"</div>
+      <div class="rc-stars">
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+      </div>
+      <p class="rc-txt">Purchased a Shiv Ji locket via Instagram. The process was smooth and trustworthy — authentic 925 silver, beautifully made and very reasonably priced. Fast delivery. Definitely recommended!</p>
+      <div class="rc-name">Poonam Moon</div>
+      <div class="rc-when">Verified Buyer · 2 months ago</div>
+    </div>
+    <div class="rc reveal rd2">
+      <div class="rc-quote">"</div>
+      <div class="rc-stars">
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg class="rsv" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+      </div>
+      <p class="rc-txt">I bought a silver baby anklet from Bafna Silver House. The quality is top notch and I highly recommend buying silver here. Truly exceptional craftsmanship at a fair price.</p>
+      <div class="rc-name">Ajinkya Fulzele</div>
+      <div class="rc-when">Verified Buyer · 2 months ago</div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="sec" id="visit">
+  <div class="tag-row reveal"><div class="tag-line"></div><span class="tag">Find Us</span></div>
+  <h2 class="st reveal" style="margin-bottom:52px">Visit Our <em>Atelier</em></h2>
+  <div class="vg">
+    <div>
+      <div class="ir reveal">
+        <div class="il">Address</div>
+        <div class="iv">Shop No. 2, Gajraj Arcade,<br>Opp. J M Thakar Marg, Ladpura,<br>Itwari, Nagpur — 440002</div>
+      </div>
+      <div class="ir reveal rd1">
+        <div class="il">Phone</div>
+        <div class="iv"><a href="tel:+918888834365">+91 88888 34365</a></div>
+      </div>
+      <div class="ir reveal rd1">
+        <div class="il">Instagram</div>
+        <div class="iv"><a href="https://instagram.com" target="_blank">instagram.com</a></div>
+      </div>
+      <div class="ir reveal rd2">
+        <div class="il">Services Available</div>
+        <div class="svc-l">
+          <div class="svc-i"><span class="svc-d"></span>In-Store Shopping</div>
+          <div class="svc-i"><span class="svc-d"></span>Kerbside Pickup</div>
+          <div class="svc-i"><span class="svc-d"></span>Home Delivery</div>
+          <div class="svc-i"><span class="svc-d"></span>Premium Gift Wrapping</div>
+        </div>
+      </div>
+      <div class="map-box reveal">
+        <div class="map-pg">
+          <svg class="map-pin" width="26" height="35" viewBox="0 0 26 35">
+            <path d="M13 0C5.82 0 0 5.82 0 13c0 8.8 13 22 13 22S26 21.8 26 13C26 5.82 20.18 0 13 0z" fill="var(--ink)"/>
+            <circle cx="13" cy="13" r="4.5" fill="var(--ivory)"/>
+          </svg>
+          <div class="map-lbl">Gajraj Arcade, Itwari<br>Nagpur, Maharashtra</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="ir reveal">
+        <div class="il">Opening Hours</div>
+        <table class="htbl">
+          <tr><td>Monday</td><td>10:00 AM – 8:30 PM</td></tr>
+          <tr><td>Tuesday</td><td>10:00 AM – 8:30 PM</td></tr>
+          <tr><td>Wednesday</td><td>10:00 AM – 8:30 PM</td></tr>
+          <tr><td>Thursday</td><td>10:00 AM – 8:30 PM</td></tr>
+          <tr><td>Friday</td><td>10:00 AM – 8:30 PM</td></tr>
+          <tr><td>Saturday</td><td>10:00 AM – 8:30 PM</td></tr>
+          <tr><td style="color:var(--gold-warm)">Sunday</td><td>By Appointment</td></tr>
+        </table>
+      </div>
+      <div class="ir reveal rd1" style="border-bottom:none">
+        <div class="il">About Our Store</div>
+        <div class="iv" style="font-family:'Playfair Display',serif;font-size:clamp(14px,1.3vw,16.5px);color:var(--slate);line-height:1.85">
+          Since 1983 we've been Nagpur's trusted wholesale jeweller, known for beautifully crafted silver jewellery. Whether a perfect gift or a stunning addition to your collection, our 925 and 999 silver pieces await you.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <div class="cta-ey reveal">Begin Your Silver Journey</div>
+  <h2 class="cta-h reveal">Crafted with <em>Devotion</em><br>Since 1983</h2>
+  <p class="cta-s reveal">Visit us in Nagpur or shop through Instagram</p>
+  <div class="cta-bs reveal">
+    <a href="tel:+918888834365" class="btn-ivory">Call +91 88888 34365</a>
+    <a href="https://instagram.com" class="btn-gl" target="_blank">Shop on Instagram</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div>
+      <div class="f-logo">Bafna Silver House</div>
+      <div class="f-sub">925 &amp; 999 · Since 1983 · Nagpur</div>
+    </div>
+    <div class="fcols">
+      <div class="fc">
+        <div class="fct">Collections</div>
+        <ul>
+          <li><a href="#">Anklets</a></li>
+          <li><a href="#">Bracelets</a></li>
+          <li><a href="#">Necklaces</a></li>
+          <li><a href="#">Rings</a></li>
+          <li><a href="#">Lockets</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <div class="fct">Company</div>
+        <ul>
+          <li><a href="#">Our Heritage</a></li>
+          <li><a href="#">Purity Standards</a></li>
+          <li><a href="#">Wholesale</a></li>
+          <li><a href="#">Visit Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="fb">
+    <div class="fc-copy">© 2024 Bafna Silver House. Nagpur, Maharashtra. All rights reserved.</div>
+    <a href="https://instagram.com" class="f-ig" target="_blank">
+      <span class="ig-box">✦</span>instagram.com
+    </a>
+  </div>
+</footer>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cur'),crng=document.getElementById('crng');
+let mx=0,my=0,rx=0,ry=0;
+if(window.matchMedia('(hover:hover)').matches){
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+  (function t(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;crng.style.left=rx+'px';crng.style.top=ry+'px';requestAnimationFrame(t);})();
+  document.querySelectorAll('a,button,.cc,.qc,.rc').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2)';crng.style.transform='translate(-50%,-50%) scale(1.4)';crng.style.borderColor='rgba(42,36,32,.55)';});
+    el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';crng.style.transform='translate(-50%,-50%) scale(1)';crng.style.borderColor='rgba(42,36,32,.35)';});
+  });
+}
+// HAMBURGER
+const burg=document.getElementById('burg'),mnav=document.getElementById('mnav');
+burg.addEventListener('click',()=>{burg.classList.toggle('open');mnav.classList.toggle('open');});
+mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burg.classList.remove('open');mnav.classList.remove('open');}));
+// SCROLL REVEAL
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(e=>obs.observe(e));
+// PARALLAX hero
+window.addEventListener('scroll',()=>{
+  const el=document.querySelector('.ring-float');
+  if(el&&window.innerWidth>840)el.style.transform=`translateY(${-window.scrollY*.04}px)`;
+},{passive:true});
+</script>
+</body>
+</html>
